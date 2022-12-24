@@ -3,7 +3,7 @@ const moment = require('moment');
 const httpStatus = require('http-status');
 const config = require('../config/config');
 const userService = require('./user.service');
-const { Token } = require('../models');
+const { Token, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 
@@ -51,13 +51,33 @@ const saveToken = async (token, userId, expires, type, blacklisted = false) => {
  * @param {string} type
  * @returns {Promise<Token>}
  */
-const verifyToken = async (token, type) => {
-  const payload = jwt.verify(token, config.jwt.secret);
-  const tokenDoc = await Token.findOne({ token, type, user: payload.sub, blacklisted: false });
-  if (!tokenDoc) {
-    throw new Error('Token not found');
-  }
-  return tokenDoc;
+const verifyToken = async (req, res, next) => {
+  const {token, type} = req.headers
+  const payload = jwt.verify(token, config.jwt.secret, function(err, decode)  {
+      if(err) {
+        return err
+      }
+      return decode
+    });
+    if(payload) {
+      if(payload.name == "TokenExpiredError"){
+        return res.status(401).json({
+          success:false, 
+          message: "Token has been expired", 
+          expiredAt: payload?.expiredAt
+        })
+      }
+      const tokenDoc = await Token.findOne({ token, type, user: payload.sub, blacklisted: false });
+      if (!tokenDoc) {
+        return res.status(401).json({
+          success: false, 
+          message: "Please login and try again"
+        });
+      }
+      const user = await User.findOne({_id:tokenDoc.user});
+      req.user = user 
+      next()
+    }
 };
 
 /**
@@ -72,6 +92,7 @@ const generateAuthTokens = async (user) => {
   const refreshTokenExpires = moment().add(config.jwt.refreshExpirationDays, 'days');
   const refreshToken = generateToken(user.id, refreshTokenExpires, tokenTypes.REFRESH);
   await saveToken(refreshToken, user.id, refreshTokenExpires, tokenTypes.REFRESH);
+  await saveToken(accessToken, user.id, accessTokenExpires, tokenTypes.ACCESS);
 
   return {
     access: {
