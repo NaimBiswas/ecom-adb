@@ -47,12 +47,14 @@ passport.use('jwt', jwtStrategy);
 
 // limit repeated failed requests to auth endpoints
 if (config.env === 'production') {
-  app.use('/v1/auth', authLimiter);
+  app.use('/api/auth', authLimiter);
 }
 
 // v1 api routes
-app.use('/v1', routes);
-
+app.use('/api', routes);
+app.use('/', async (req, res)  =>{
+  res.send("Hello eCom World")
+})
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
