@@ -1,5 +1,4 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
 const userController = require('../../controllers/user.controller');
@@ -9,8 +8,9 @@ const router = express.Router();
 router.post('/manageUsers', validate(userValidation.createUser), userController.createUser)
 router.get('/getUsers', validate(userValidation.getUsers), userController.getUsers);
 
-router.patch('/manageUsers', validate(userValidation.updateUser), userController.updateUser)
-router.delete('/manageUsers', validate(userValidation.deleteUser), userController.deleteUser);
+router.get('/getUser/:userId', validate(userValidation.getUsers), userController.getUser);
+router.patch('/manageUsers/:userId', validate(userValidation.updateUser), userController.updateUser)
+router.delete('/manageUsers/:userId', validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
 
