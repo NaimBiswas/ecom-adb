@@ -6,7 +6,22 @@ const { roles } = require('../config/roles');
 
 const userSchema = mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    userName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    country: {
       type: String,
       required: true,
       trim: true,
@@ -44,6 +59,16 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    productAdded: {
+      type: Number
+    }, 
+    productModified: {
+      type: Number
+    },
+    status:{
+      type: Boolean,
+    },
+    paymentDetails: []
   },
   {
     timestamps: true,
