@@ -68,7 +68,8 @@ const userSchema = mongoose.Schema(
     status:{
       type: Boolean,
     },
-    paymentDetails: []
+    paymentDetails: [],
+    image: {}
   },
   {
     timestamps: true,
