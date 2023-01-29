@@ -23,7 +23,10 @@ const userSchema = mongoose.Schema(
     },
     country: {
       type: String,
-      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
       trim: true,
     },
     email: {
@@ -58,6 +61,22 @@ const userSchema = mongoose.Schema(
     isEmailVerified: {
       type: Boolean,
       default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    acStatus: {
+      type: String,
+      default: "Pending",
     },
     productAdded: {
       type: Number
