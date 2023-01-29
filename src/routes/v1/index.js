@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
+const isUnique = require('./isUnique.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 const { verifyToken } = require('../../services/token.service');
@@ -20,6 +21,11 @@ const defaultRoutes = [
     route: userRoute,
     middleWare: verifyToken
   },
+  {
+    path: '/isUnique',
+    route: isUnique,
+    middleWare: freeMiddleWare
+  },
 ];
 
 const devRoutes = [
@@ -34,7 +40,7 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.middleWare, route.route);
 });
 
-/* istanbul ignore next */
+
 if (config.env === 'development') {
   devRoutes.forEach((route) => {
     router.use(route.path, route.route);

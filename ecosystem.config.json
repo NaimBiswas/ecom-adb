@@ -3,12 +3,12 @@
     {
       "name": "app",
       "script": "src/index.js",
-      "instances": 1,
+      "instances": 2,
       "autorestart": true,
       "watch": false,
       "time": true,
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "development"
       }
     }
   ]
