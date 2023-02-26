@@ -54,6 +54,12 @@ if (config.env === 'production') {
 // v1 api routes
 app.use('/api', routes);
 // send back a 404 error for any unknown api request
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'eCom Admin Api',
+    success:true
+  })
+})
 app.use((req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
