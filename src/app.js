@@ -56,7 +56,7 @@ app.use('/api', routes);
 // send back a 404 error for any unknown api request
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'eCom Admin Api',
+    message: `eCom Admin Api. MODE ${config.env}`,
     success:true
   })
 })
