@@ -9,7 +9,7 @@ router.post('/', validate(createCategoryVal) , createCategory)
 router.get('/', getAllCategory)
 
 router.get('/:id', validate(checkIdVal), getCategoryById)
-router.get('/:id', validate(checkIdVal), updateCategory)
+router.patch('/:id', validate(checkIdVal), validate(createCategoryVal), updateCategory)
 router.get('/:id', validate(checkIdVal), deleteCategory)
 
 

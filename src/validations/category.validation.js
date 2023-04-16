@@ -8,7 +8,7 @@ const createCategoryVal = {
     })
 }
 const checkIdVal = {
-    query: Joi.object().keys({
+    params: Joi.object().keys({
         id: Joi.string().required()
     })
 }
