@@ -1,11 +1,11 @@
 {
   "apps": [
     {
-      "name": "app",
+      "name": "eCom Api",
       "script": "src/index.js",
-      "instances": 2,
+      "instances": 1,
       "autorestart": true,
-      "watch": false,
+      "watch": true,
       "time": true,
       "env": {
         "NODE_ENV": "development"
