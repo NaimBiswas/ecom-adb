@@ -7,7 +7,13 @@ const createCategoryVal = {
         isActive: Joi.boolean().required().default(true),
     })
 }
+const checkIdVal = {
+    query: Joi.object().keys({
+        id: Joi.string().required()
+    })
+}
 
 module.exports = {
     createCategoryVal,
+    checkIdVal
 }

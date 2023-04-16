@@ -8,5 +8,18 @@ const createCategory  = async (req, res) => {
     if(createCategory) return res.status(httpStatus.CREATED).json({success:true, details: createCategory})
 }
 
+const getAllCategory = async (req, res) => {
 
-module.exports = {createCategory}
+}
+
+const getCategoryById = async (req, res) => {
+
+}
+const updateCategory = async (req, res) => {
+
+}
+const deleteCategory = async (req, res) => {
+
+}
+
+module.exports = {createCategory, getAllCategory,getCategoryById,updateCategory, deleteCategory}
