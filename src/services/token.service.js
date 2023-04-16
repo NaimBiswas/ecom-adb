@@ -6,6 +6,7 @@ const userService = require('./user.service');
 const { Token, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
+const AttachUser = require('./common.service');
 
 /**
  * Generate token
@@ -74,8 +75,10 @@ const verifyToken = async (req, res, next) => {
           message: "Please login and try again"
         });
       }
-      const user = await User.findOne({_id:tokenDoc.user});
-      req.user = user 
+      const user = await User.findById(tokenDoc.user, {name:1, email:1, role:1});
+      req.user = user._doc
+      const attachUser = new AttachUser(req)
+      req.attachUser = attachUser
       next()
     }
 };
