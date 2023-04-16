@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
+const categoriesRouter = require('./categories/categories.router');
 const isUnique = require('./isUnique.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -21,6 +22,12 @@ const defaultRoutes = [
     route: userRoute,
     middleWare: verifyToken
   },
+  {
+    path: '/category',
+    route: categoriesRouter,
+    middleWare: verifyToken
+  },
+  
   {
     path: '/isUnique',
     route: isUnique,
