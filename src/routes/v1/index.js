@@ -6,6 +6,7 @@ const isUnique = require('./isUnique.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 const { verifyToken } = require('../../services/token.service');
+const salesRouter = require('./sales/sales.router')
 
 const router = express.Router();
 const freeMiddleWare = async (req, res, next)  => {
@@ -25,6 +26,11 @@ const defaultRoutes = [
   {
     path: '/category',
     route: categoriesRouter,
+    middleWare: verifyToken
+  },
+  {
+    path: '/sales',
+    route: salesRouter,
     middleWare: verifyToken
   },
   
