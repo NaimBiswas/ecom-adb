@@ -9,10 +9,8 @@ const getTodaySells = async () => {
     const todayOrders = await Order.find({createdAt:{$gte:dayStart, $lte:dayEnd}}, {total:1, shippingCost:1})
     const sells = todayOrders.length ? todayOrders?.map(_odr => _odr.total + _odr.shippingCost)?.reduceRight((a, b) => a + b) : 0
     return {
-        data: {
-            sells: sells, 
-            orderCount: todayOrders.length
-        }
+        sells: sells, 
+        orderCount: todayOrders.length
     }
 }
 const getTodayRevenue = async () => {
@@ -31,10 +29,9 @@ const getTodayRevenue = async () => {
         })
     }
     return {
-        data: {
-            sells: revenueCount, 
-            orderCount: todayOrders.length
-    }}
+        sells: revenueCount, 
+        orderCount: todayOrders.length
+    }
 }
 const getTotalSales = async () => {
     const GenerateTime = new GenerateTimeSlot()
@@ -43,10 +40,8 @@ const getTotalSales = async () => {
     const todayOrders = await Order.find({createdAt:{$gte:startDate, $lte:endDate}}, {total:1, shippingCost:1})
     const sells = todayOrders.length ? todayOrders?.map(_odr => _odr.total + _odr.shippingCost)?.reduceRight((a, b) => a + b) : 0
     return {
-        data: {
-            sells: sells, 
-            orderCount: todayOrders.length
-        }
+        sells: sells, 
+        orderCount: todayOrders.length
     }
 }
 const getTotalRevenue = async () => {
@@ -66,10 +61,9 @@ const getTotalRevenue = async () => {
         })
     }
     return {
-        data: {
-            sells: revenueCount, 
-            orderCount: todayOrders.length
-    }}
+        sells: revenueCount, 
+        orderCount: todayOrders.length
+    }
 }
 
 
