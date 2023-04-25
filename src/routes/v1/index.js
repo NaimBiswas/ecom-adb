@@ -7,6 +7,7 @@ const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 const { verifyToken } = require('../../services/token.service');
 const salesRouter = require('./sales/sales.router')
+const productRouter = require('./product/product.router')
 
 const router = express.Router();
 const freeMiddleWare = async (req, res, next)  => {
@@ -31,6 +32,11 @@ const defaultRoutes = [
   {
     path: '/sales',
     route: salesRouter,
+    middleWare: verifyToken
+  },
+  {
+    path: '/product',
+    route: productRouter,
     middleWare: verifyToken
   },
   
