@@ -1,6 +1,6 @@
 class ResError  {
     constructor(statusCode, message, res){
-       res.status(statusCode).json({success:false, error:message})
+      return res.status(statusCode).json({success:false, error:message})
     }
 }
 
