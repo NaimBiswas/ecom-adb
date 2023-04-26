@@ -22,7 +22,9 @@ var ProductSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: true
-    }
+    },
+    createdBy: String,
+    modifiedBy: String
 }, {timestamps: true});
 
 //Export the model
