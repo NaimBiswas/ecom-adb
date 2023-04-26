@@ -24,7 +24,9 @@ var ProductSchema = new mongoose.Schema({
         default: true
     },
     createdBy: String,
-    modifiedBy: String
+    modifiedBy: String,
+    createdById: String,
+    modifiedById: String
 }, {timestamps: true});
 
 //Export the model
