@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const categoryService = require('../../services/category/category.service');
+const pick = require('../../utils/pick');
 
 const createCategory = async (req, res) => {
   req.attachUser.create();
@@ -9,8 +10,10 @@ const createCategory = async (req, res) => {
 };
 
 const getAllCategory = async (req, res) => {
-  const cat = await categoryService.getAllCategory(req, res);
-  if (cat) return res.status(httpStatus.OK).json({ success: true, data: cat });
+  const filter = pick(req.query, ['name', 'role']);
+  const options = pick(req.headers, ['sortby', 'limit', 'page']);
+  const cat = await categoryService.getAllCategory(filter, options, req, res);
+  if (cat) return res.status(httpStatus.OK).json({ success: true, ...cat });
 };
 
 const getCategoryById = async (req, res) => {
