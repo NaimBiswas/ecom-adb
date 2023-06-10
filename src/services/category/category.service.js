@@ -14,9 +14,9 @@ const createCategory = async (req, res, next) => {
 
     return await catSave.save()
 }
-const getAllCategory = async (req, res) => {
-    const categories = await Category.find({})
-    if (categories && categories.length > 0) return categories
+const getAllCategory = async (filter, options, req, res) => {
+    const categories = await Category.paginate(filter, options)
+    if (categories && categories.results.length > 0) return categories
     new ResError(httpStatus.NOT_ACCEPTABLE, "No Category Found", res)
     return
 }
