@@ -75,7 +75,7 @@ const verifyToken = async (req, res, next) => {
           message: "Please login and try again"
         });
       }
-      const user = await User.findById(tokenDoc.user, {name:1, email:1, role:1});
+      const user = await User.findById(tokenDoc.user, {firstName:1, lastName:1, email:1, role:1});
       req.user = user._doc
       const attachUser = new AttachUser(req)
       req.attachUser = attachUser

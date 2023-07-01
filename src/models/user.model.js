@@ -87,6 +87,7 @@ const userSchema = mongoose.Schema(
     status:{
       type: Boolean,
     },
+    phoneNumber: { type: String},
     paymentDetails: [],
     image: {}
   },
